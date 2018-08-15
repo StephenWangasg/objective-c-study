@@ -1,0 +1,70 @@
+Chapter 4 Data Types and Expressions
+
+1. Data Types
+
+Every type has a range of values associated with it. This range is not defined in the language, it typically depends on the computer you're running on,
+and is therefore called implementation or machine dependent. 
+
+1.1. int
+
+1.2. float
+
+1.3. double 
+
+1.4. char            'a', '\n'         
+
+1.5. NSString        @"a_nsstring_object"
+
+1.6. id
+
+
+2. Qualifiers: long, long long, short, unsigned, signed
+
+
+Type                     Constant Examples                   NSLog chars
+
+char                     'a', '\n'                            %c
+
+short int                 —                                   %hi, %hx, %ho
+
+unsigned short int        —                                   %hu, %hx, %ho
+
+int                       12, -97, 0xFFE0, 0177               %i, %x, %o
+
+unsigned int              12u, 100U, 0XFFu                    %u, %x, %o
+
+long int                  12L, -2001, 0xffffL                 %li, %lx, %lo
+
+unsigned long int         12UL, 100ul, 0xffeeUL               %lu, %lx, %lo
+
+long long int             0xe5e5e5e5LL, 500ll                 %lli, %llx, %llo
+
+unsigned long long int    12ull, 0xffeeULL                    %llu, %llx, %llo
+
+float                     12.34f, 3.1e-5f, 0x1.5p10, 0x1P-1    %f, %e, %g, %a
+
+double                    12.34, 3.1e-5, 0x.1p3                %f, %e, %g, %a
+
+long double               12.34L, 3.1e-5l                      %Lf, $Le, %Lg
+
+id                        nil                                  %p
+
+
+
+3. Type id
+
+The id data type is used to store an object of any type.  It is the basis for very important features in Objective-C known as polymorphism and dynamic binding.
+
+
+4. Integer and Floating point conversions
+
+
+5. The Type Cast Operator
+
+The type cast operator is often used to coerce an object that is a generic id type into an object of a particular class.
+
+id myNumber;
+Fraction* myFraction;
+
+myFraction = (Fraction*) myNumber;
+

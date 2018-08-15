@@ -1,0 +1,54 @@
+Chapter 3 Classes, Objects, and Methods
+
+1. Class declaration and class definition, @interface and @implementation
+
+1.1. @interface
+
+@interface CClassName : ParentClassName
+    //method declaration
+    -(return_value_type) setSomeValue: (par1_type) p1 andAnotherValue: (par2_type) p2;
+@end
+
+
+   - -> instance Method
+   + -> class Method
+
+
+1.2.  @implementation
+
+@implementation CClassName                 //inside curly braces
+{                                          //has two instance variables
+    //memberDeclarations;
+    int numerator;
+    int denominator;
+}
+  //methodDefinitions;
+  - (return_value_type) setSomeValue: (par1_type) p1 andAnotherValue: (par2_type) p2
+  {
+      //access instnce variables directly by name
+      numerator = p1;
+      denominator = p2;
+  }
+@end
+
+
+For multiple arguments, it takes some time to get used to it.
+
+Each parameter (except the first) has an optional name:
+
+-(void) setTo: (int) n over: (int) d;
+
+When call
+
+[instance setTo: 1 over: 2];
+
+
+If the argument name is missing:
+
+-(void) setTo: (int) n : (int) d;
+
+Call:
+
+[instance setTo: 1 : 2];
+
+

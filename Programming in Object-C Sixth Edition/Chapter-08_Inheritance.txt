@@ -1,0 +1,53 @@
+Chapter 8 Inheritance
+
+1. Root class
+
+A class that has no parent is at the top of the hierarchy and is known as a root class.
+
+In Objective-C, you can define your own root class, but it's something you normally won't want to do. Instead you want to take advantage
+of existing classes/ 
+
+2. Inheritance of instance variables
+
+Instance variables from base classes are automatically inherited by sub-class. However only nonprivate instance variables from parent are
+accessible from sub-class.
+
+Non-private instance variables must be declared in the interface section, and not in the implementation section.
+Properties are synthesized in the implementation section, are private instance variables and are not directly accessible by subclass.
+
+------------------------------------------
+@interface ClassA : NSObject
+{
+    //nonprivate instance variable
+    int x;
+}
+
+-(void) initVar;
+
+@end
+
+-----------------------------------------
+@interface ClassB: ClassA
+-(void) printVar;
+@end
+
+------------------------------------------
+@implementation ClassB
+-(void) printVar{
+    NSLog(@"X=%i", x);             //subclass can access nonprivate instance variables from parent class.
+}
+
+For parent properties synthesized in implementation section, you need to use dot operator in sub-class method.
+
+3. Methods resolution
+
+Bottom up
+
+4. Extension through Inheritance
+
+5. @class directive
+
+same as class forward declaration in C++.
+
+6. Overriding Methods
+

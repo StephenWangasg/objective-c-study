@@ -1,0 +1,97 @@
+Chapter 7 More on Classes
+
+1. Separate interface and implementation Files
+
+------------------------------------
+//Fraction.h
+
+#import <Foundation/Foundation.h>
+
+@interface Fraction : NSObject
+
+-(void) print;
+-(int) numerator;
+-(void) setNumerator: (int) n;
+
+@end
+
+-------------------------------------
+//Fraction.m 
+
+#import "Fraction.h"
+
+@implementation Fraction
+{
+    int numerator;
+    int denominator;
+}
+
+-(void) print
+{
+    NSLog(@"%i/%i", numerator, denominator);
+}
+
+-(int) numerator
+{
+    return numerator;
+}
+
+-(void) setNumerator: (int) n
+{
+    numerator = n;
+}
+
+---------------------------------------
+
+
+2. Synthesized Accessor Methods
+
+------------------------------------
+//Fraction.h
+
+#import <Foundation/Foundation.h>
+
+@interface Fraction : NSObject
+
+@property int numerator, denominator;   //This will auto generate setter and getter methods
+-(void) print;
+
+@end
+
+-------------------------------------
+//Fraction.m 
+
+#import "Fraction.h"
+
+@implementation Fraction
+
+@synthesize numerator, denominator;      //Optional, if present, instance variable names as property names
+                                         //if missing, underscore (_) the first character of its name.
+-(void) print
+{
+    NSLog(@"%i/%i", numerator, denominator);
+}
+
+-------------------------------------
+
+3. Accessing properties using the dot operator
+
+[myFraction numerator] ===============  myFraction.numerator
+
+[myFraction setNumerator: 1] ================= myFraction.numerator = 1
+
+Note it is syntactically correct to write myFraction.print, but dot operator is intended to be used with properties.
+
+
+4. The self keyword
+
+In methods, we can directly access instance variables by name, but how to call other methods that belong to the same class?
+
+In Objective-C, you call method through this syntax [self method], 
+
+-(void) do1
+{
+    [self do2];
+}
+
+self is a keyword in Objective-C.

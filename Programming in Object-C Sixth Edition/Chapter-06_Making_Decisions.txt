@@ -1,0 +1,9 @@
+Chapter 6 Making Decisions
+
+1. if, switch, conditional
+
+
+2. BOOL type
+
+BOOL isPrime = YES; //or NO
+
