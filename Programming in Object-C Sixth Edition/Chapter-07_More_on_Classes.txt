@@ -72,6 +72,19 @@ Chapter 7 More on Classes
     NSLog(@"%i/%i", numerator, denominator);
 }
 
++-----------------------------------+-----------------------------------------------------------------------+
+|    Directives                     |               Creates                                                 |
++-----------------------------------+-----------------------------------------------------------------------+
+|   @property only                  |        accessor methods and underscored private instance variables    |
++-----------------------------------+-----------------------------------------------------------------------+
+|   @property                       |                                                                       |
+|   @synthesize                     |        accessor methods and nonunderscored private instance variables |
++-----------------------------------+-----------------------------------------------------------------------+
+|   @property                       |                                                                       |
+|   @synthesize var = whatEver      |     accessor methods and {whatEver} as the private instance variable  |
++-----------------------------------+-----------------------------------------------------------------------+
+
+
 -------------------------------------
 
 3. Accessing properties using the dot operator

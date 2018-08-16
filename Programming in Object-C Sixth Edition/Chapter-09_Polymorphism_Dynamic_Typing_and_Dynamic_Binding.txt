@@ -1,0 +1,58 @@
+Chapter 9 Polymorphism, Dynamic Typing and Dynamic Binding
+
+1. Polymorphism: same name, different class
+
+The different classes may or may not related in a sense they are not originating from same base class or interface.
+
+
+
+2. Dynamic binding and the id Type
+
+The system makes the decision about the class of the object and therefore which method to invoke dynamically at runtime rather than at compile time.
+
+
+3. Ask questions about classes
+
+             Method                                                                              Question  or Action
+
+-(BOOL) isKindOfClass:  class-object                                              Is the object a member of class-object or a descendant?
+
+-(BOOL) isMemberOfClass: class-object                                             Is the object a member of class-object?
+
+-(BOOL) respondsToSelector: selector                                              Can the object respond to the method specified by selector?
+
++(BOOL) instancesRespondToSelector: selector                                      Can instances of the specified class respond to selector?
+
++(BOOL)isSubclassOfClass: class-object                                            Is the object a subclass of the specified class?
+
+-(id) performSelector: selector                                                   Apply the method specified by selector.
+
+-(id) performSelector: selector withObject: object                                Apply the method specified by selector passing the argument object.
+
+-(id) performSelector: selector withObject: object1 withObject: object2           Apply the method specified by selector with the arguments object1 and object2.
+
+
+   3.1. To generate a class object
+
+        from class name:      [Square class]
+
+        from class instance:  [mySquare class]
+
+
+   3.2. To test if two objects are instances from the same class.
+
+        if( [obj1 class] == [obj2 class] ) {}
+
+
+   3.3. To see if a variable myFrac is a Fraction class object:
+
+       [myFrac isMemberOfClass: [Fraction class]]
+
+
+   3.4. To generate a selector
+
+       SEL action = @selector(setTo:over:)
+
+   3.5. To see whether an instance of a class responds to selector:
+
+       [Fraction instancesRespondToSelector: @selector (setTo:over:)]

@@ -1,0 +1,68 @@
+Chapter 10 More on Variables and Data Types
+
+1. Initializing objects
+
+1.1. Alloc and then initialize
+
+Fraction* myFract = [[Fraction alloc] init];
+
+
+1.2. A class can have many initialization methods
+
+initWithArray:
+initWithArray:copyItem:
+initWithContentsOfFile:
+initWithObjects:
+initWithObjects:count:
+
+1.3. A standard "template" overriding init:
+
+-(instancetype) init
+{
+    self = [super init];
+    if(self) {
+        //initialization code here.
+    }
+    return self;
+}
+
+You must assign the result of executing the parent's init method back to self because an initializer has the right to change the location of the object in memory.
+
+* instancetype or id
+
+-(instancetype) initWith: (int) n over: (int) d                  ____         -(id) initWith: n over: (int) d
+{                                                  \      /     /    \        {
+    self = [super init];                            \    /      \___
+    if(self) {                                       \  /           \               //Issue?
+        [self setTo: n over: d];                      \/        \___/
+    }
+    return self;
+}                                                                              }
+
+if use instancetype, the actual type can still be deduced by compiler, or compile time check is ensured.
+
+
+1.4. Designated initializer
+
+If you class contains more than one initializer, one of them should be your designated initializer, and all the other initializers should use it.
+
+---------------------------------
+
+2. Scope 
+
+global variable:
+               int gMoveNumebr = 0;
+
+external variable:
+               extern int gMoveNumebr;
+
+static variable:
+               static int gGlobalVar = 0; //accessible from current file only
+
+
+3. enumerated data Types
+
+enum flag { false, true };
+
+enum flag endofData, matchFound
+

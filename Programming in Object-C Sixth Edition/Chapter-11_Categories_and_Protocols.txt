@@ -1,0 +1,173 @@
+Chapter 11 Categories and Protocols
+
+1. Category
+
+1.1. problems:
+     *add new methods to a class
+     *group related methods into a categories 
+     *extend a library class with new methods without sub-classing
+
+     category is the solution
+     -------------------------------------------------------------
+     A category provides an easy way for you to modularize the definition of a class into groups or categories of related methods.
+
+     Syntax: 
+
+     -------------------------------------------------------------
+     category declaration:
+ 
+     //Fraction+MathOps.h                  => by convention, the base name of the header file for a category is the class name followed
+                                              by a plus sign, followed by the category name
+     #import "Fraction.h"                  => Importing the original header file
+
+     @interface Fraction (MathOps)
+      -(Fraction*) add: (Fraction *) f;
+      -(Fraction*) mul: (Fraction *) f;
+      -(Fraction*) sub: (Fraction *) f;
+      -(Fraction*) div: (Fraction *) f;
+     @end 
+     -------------------------------------------------------------
+     category implementation:
+     
+     //Fraction+MathOps.m                 => by convention, the base name of the implementation file for a category is the class name followed
+                                             by a plus sign, followed by the category name 
+
+     #import "Fraction+MathOps.h"
+
+     @implementation Fraction (MathOps)
+
+        //implementation
+
+     @end 
+     -------------------------------------------------------------
+
+     category interface section can go either in the original Fraction.h or in its own header file Fraction+MathOps.h
+
+     category implementation section can go either in the original Fraction.m or in its own implementation file Fraction+MathOps.m
+     -------------------------------------------------------------
+
+2. Class Extension
+
+   class extension is unnamed category. no name is specified between the ( and ).
+
+   You can use class extension to add additional:
+    * instance variables      [Not allowed in named categories]
+    * properties              [where you can only define methods]
+    * methods                 [Methods are private in the sense the're not advertised in the interface section, however if someone knows]
+                              [the name of a private method, she can still call it. Methods in a class extension must implemented in the]
+                              [main implementation section for the class and not in a separate implementation section.]
+    
+   ---------------------------------------------
+   //ship.h
+   #import <Foundation/Foundation.h>
+   #import "Person.h"
+
+   @interface Ship : NSObject
+
+   @property (strong, readonly) Person* captain;
+   -(id) initWithCaptain: (Person*) captain;
+   
+   @end
+
+   ---------------------------------------------
+   //ship.m
+   #import "Ship.h"
+
+   @interface Ship()                                  | The class extension must implemented in the main 
+                                                      | implementation section for the Ship class
+   @property (strong, readwrite) Person* captain;
+
+   @end
+
+   @implementation Ship
+
+   @synthesize captain = _captain;
+
+   -（id) initWithCaptain: (Person*) captain {
+       self = [super init];
+       if(self) {
+           //This only works because of the extension
+           [self setCaption:captain];
+       }
+       return self;
+   }
+   @end 
+   --------------------------------------------
+
+   +-----------------------------------------------+
+   | How to declare private methods in Objective-C |
+   +-----------------------------------------------+
+   Prior to Xcode 4.3.                                                          After Xcode 4.3
+ 
+   All methods either private or public, must be declared in interface          Private methods don't need be declared, just implement them in the
+   to declare private methods, declare them in extension:                       implementation file, that's it.
+
+   #import "Ship.h"
+
+   @interface Ship()
+
+   -(void) aprivateMethod;
+
+   @end
+
+   @implementation Ship
+
+   -(void) aprivateMethod
+   {
+       //implement the private method
+   }
+
+   //implement other methods
+   @end
+
+3. Protocols
+
+  A protocol is a list of methods that is shared among classes.  The methods listed in the protocol do not have corresponding implementation, they're meant
+  to be implemented by someone else.
+
+  A protocol lists a set of methods, some of which you can optionally implement, and others that you are required to implement. 
+
+  If you decide to implement all of the required methods for a particular protocol, you are said to conform to or adopt that protocol.
+
+  @protocol NSCopying
+   
+    -(id) copyWithZone: (NSZone *) zone;
+
+　@end
+
+  If you adopt the NSCopying protocol in your class, you must implement copyWithZone method, you tell the compiler that you are adopting NSCopying by listing
+  the protocol name inside a pair of angular brackets on the @interface line.
+
+  @interface AddressBook: NSObject<NSCopying>
+
+  Then your implementation section needs to implement the copyWithZone method.
+
+  If your class adopts more than one protocol, just list them inside the angular brackets, separated by commas.
+
+  @interface AddressBook : NSObject <NSCopying, NSCoding>
+
+  *Optional and required methods:
+
+  @protocol PROTOCOL1
+  -(void) doit;
+  -(void) doit2;
+  @optional
+  -(void) opt1;
+  -(void) opt2;
+  @required
+  -(void) doit3;
+  -(void) doit4;
+  @end
+
+  *Check if an object conforms to a protocol
+
+  [currentObject conformsToProtocol: @protocol (Drawing)]
+
+   The special @protocol directive as used here takes a protocol name and produces a protocol object.
+
+  *how to declare a protocol variable:
+
+  id <Protocol1> curObj;
+  id <Protocol1, Protocol2> curObj2;
+
+  The compiler will ensure that the objects assigned to the variables are statically typed object that conform to .. protocol.
